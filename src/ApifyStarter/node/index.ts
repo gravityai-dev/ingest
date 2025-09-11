@@ -5,7 +5,7 @@ export const NODE_TYPE = "ApifyStarter";
 
 function createNodeDefinition(): EnhancedNodeDefinition {
   const { NodeInputType } = getPlatformDependencies();
-  
+
   return {
     type: NODE_TYPE,
     name: "Apify Starter",
@@ -48,7 +48,8 @@ function createNodeDefinition(): EnhancedNodeDefinition {
         urls: {
           type: "string",
           title: "URLs to Scrape",
-          description: "JSON array of URLs to scrape. Use template syntax like {{inputs.adgmfetcher1.firms.map(f => f.url)}}",
+          description:
+            "JSON array of URLs to scrape. Use template syntax like {{inputs.adgmfetcher1.firms.map(f => f.url)}}",
           default: "[]",
           "ui:field": "template",
         },
@@ -79,10 +80,6 @@ function createNodeDefinition(): EnhancedNodeDefinition {
         description: "Apify API credentials for starting actor runs",
       },
     ],
-
-    capabilities: {
-      isTrigger: false,
-    },
   };
 }
 

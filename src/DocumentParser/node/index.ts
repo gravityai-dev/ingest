@@ -5,7 +5,7 @@ export const NODE_TYPE = "DocumentParser";
 
 function createNodeDefinition(): EnhancedNodeDefinition {
   const { NodeInputType, NodeConcurrency } = getPlatformDependencies();
-  
+
   return {
     type: NODE_TYPE,
     name: "Document Parser",
@@ -56,13 +56,6 @@ function createNodeDefinition(): EnhancedNodeDefinition {
           maximum: 100,
         },
       },
-    },
-
-    capabilities: {
-      parallelizable: true,
-      requiresConnection: true,
-      isTrigger: false,
-      concurrency: NodeConcurrency.HIGH,
     },
   };
 }

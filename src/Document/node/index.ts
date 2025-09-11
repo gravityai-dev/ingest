@@ -5,11 +5,12 @@ export const NODE_TYPE = "Document";
 
 function createNodeDefinition(): EnhancedNodeDefinition {
   const { NodeInputType, NodeConcurrency } = getPlatformDependencies();
-  
+
   return {
     type: NODE_TYPE,
     name: "Document",
-    description: "Caches and manages document content during workflow execution. Provides lazy loading and memory management for large files.",
+    description:
+      "Caches and manages document content during workflow execution. Provides lazy loading and memory management for large files.",
     category: "Ingest",
     logoUrl: "https://cdn-icons-png.flaticon.com/512/2991/2991112.png",
     color: "#4A90E2",
@@ -48,13 +49,6 @@ function createNodeDefinition(): EnhancedNodeDefinition {
           minimum: 1,
         },
       },
-    },
-
-    capabilities: {
-      parallelizable: true,
-      requiresConnection: true,
-      isTrigger: false,
-      concurrency: NodeConcurrency.MEDIUM,
     },
   };
 }
