@@ -7,6 +7,7 @@ function createNodeDefinition(): EnhancedNodeDefinition {
   const { NodeInputType } = getPlatformDependencies();
 
   return {
+    packageVersion: "1.0.9",
     type: NODE_TYPE,
     name: "Apify Starter",
     description: "Starts an Apify actor run with a list of URLs",
