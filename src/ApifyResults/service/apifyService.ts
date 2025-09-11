@@ -6,28 +6,19 @@ import { ApifyItem, ApifyRunResponse } from "../util/types";
  */
 
 /**
- * Get Apify configuration from context
+ * Fetch results from an Apify run
+ * Used by ApifyResults node
  */
-async function getApifyConfig(context: any) {
+export async function fetchApifyRunResults(runId: string, context: any): Promise<ApifyItem[]> {
+  const logger = createLogger("ApifyService");
   const credentials = await getNodeCredentials(context, "apifyCredential");
   
   if (!credentials?.token) {
     throw new Error("Apify API token not found in credentials");
   }
 
-  return {
-    apiToken: credentials.token,
-    baseUrl: "https://api.apify.com/v2",
-  };
-}
-
-/**
- * Fetch results from an Apify run
- * Used by ApifyResults node
- */
-export async function fetchApifyRunResults(runId: string, context: any): Promise<ApifyItem[]> {
-  const logger = createLogger("ApifyService");
-  const { apiToken, baseUrl } = await getApifyConfig(context);
+  const apiToken = credentials.token;
+  const baseUrl = "https://api.apify.com/v2";
 
   logger.info("Fetching Apify run results", { runId });
 

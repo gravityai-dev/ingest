@@ -112,9 +112,7 @@ export class ApifyStarterExecutor extends PromiseNode<ApifyStarterConfig> {
    */
   private buildCredentialContext(context: NodeExecutionContext) {
     return {
-      credentials: {
-        apify: context.credentials?.apifyCredential || {},
-      },
+      credentials: context.credentials || {},
       nodeType: NODE_TYPE,
       workflowId: context.workflow?.id || "",
       executionId: context.executionId || "",

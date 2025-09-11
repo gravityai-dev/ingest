@@ -110,9 +110,12 @@ export class ApifyResultsExecutor extends CallbackNode<ApifyResultsConfig, Apify
       logger.info(`ApifyResults: Fetching results for run ${resolvedConfig.runId}`);
 
       try {
-        // Build credential context for service
-        const credentialContext = this.buildCredentialContext(event as any);
-        const results = await fetchApifyRunResults(resolvedConfig.runId, credentialContext);
+        // Get execution context from the executor (set by CallbackNodeActor)
+        const executionContext = (this as any).executionContext;
+        if (!executionContext) {
+          throw new Error("Execution context not available");
+        }
+        const results = await fetchApifyRunResults(resolvedConfig.runId, executionContext);
 
         if (!results || !Array.isArray(results)) {
           logger.error(`ApifyResults: Invalid results from Apify`, {
@@ -225,18 +228,4 @@ export class ApifyResultsExecutor extends CallbackNode<ApifyResultsConfig, Apify
     return ["continue"];
   }
 
-  /**
-   * Build credential context from execution context
-   */
-  private buildCredentialContext(context: NodeExecutionContext) {
-    return {
-      credentials: {
-        apify: context.credentials?.apifyCredential || {},
-      },
-      nodeType: NODE_TYPE,
-      workflowId: context.workflow?.id || "",
-      executionId: context.executionId || "",
-      nodeId: context.nodeId || "",
-    };
-  }
 }

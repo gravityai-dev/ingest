@@ -1,6 +1,6 @@
 {
   "name": "@gravityai-dev/ingest",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Data ingestion nodes for Gravity workflow system",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

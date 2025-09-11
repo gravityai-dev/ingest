@@ -70,9 +70,7 @@ export class HyperbrowserExecutor extends PromiseNode<HyperbrowserConfig> {
    */
   private buildCredentialContext(context: NodeExecutionContext) {
     return {
-      credentials: {
-        hyperbrowser: context.credentials?.hyperbrowserCredential || {},
-      },
+      credentials: context.credentials || {},
       nodeType: NODE_TYPE,
       workflowId: context.workflow?.id || "",
       executionId: context.executionId || "",
