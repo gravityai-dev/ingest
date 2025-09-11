@@ -15,6 +15,12 @@ export interface ExtractedLink {
   absoluteUrl: string;
 }
 
+export interface HyperbrowserLink {
+  text: string;
+  href: string;
+  absoluteUrl: string;
+}
+
 export type ExtractedTable = Record<string, {
   text: string;
   href: string | null;

@@ -31,7 +31,7 @@ export class SearchWebExecutor extends PromiseNode<SearchWebConfig> {
     });
 
     try {
-      const results = await searchWeb(config, credentialContext.credentials);
+      const results = await searchWeb(config, credentialContext);
       
       logger.info("Search completed", {
         webResultsCount: results.webResults.length,

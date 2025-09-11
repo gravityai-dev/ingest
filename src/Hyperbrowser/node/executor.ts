@@ -45,15 +45,22 @@ export class HyperbrowserExecutor extends PromiseNode<HyperbrowserConfig> {
     // Call the crawl service with configuration
     const result = await crawlWebPage(
       crawlOptions,
-      credentialContext.credentials
+      credentialContext
     );
 
     // Wrap in __outputs pattern for multi-output routing
     return {
       __outputs: {
-        links: result.links,
+        links: result.links || [],
         content: result.content,
-        metadata: result.metadata
+        metadata: {
+          url: result.metadata?.url || config.url,
+          totalLinks: result.metadata?.totalLinks || 0,
+          totalTables: result.metadata?.totalTables || 0,
+          pagesScraped: result.metadata?.pagesScraped || 1,
+          extractionMode: result.metadata?.extractionMode || "links",
+          timestamp: result.metadata?.timestamp || new Date().toISOString()
+        }
       }
     };
   }

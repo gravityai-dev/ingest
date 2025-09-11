@@ -1,10 +1,5 @@
 import { type NodeExecutionContext } from "@gravityai-dev/plugin-base";
-import { 
-  ApifyResultsConfig, 
-  ApifyResultsState, 
-  ApifyResultsExecutorOutput,
-  ApifyItem 
-} from "../util/types";
+import { ApifyResultsConfig, ApifyResultsState, ApifyResultsExecutorOutput, ApifyItem } from "../util/types";
 import { CallbackNode, createLogger } from "../../shared/platform";
 import { fetchApifyRunResults } from "../service/apifyService";
 import { createHash } from "crypto";
@@ -22,7 +17,7 @@ export class ApifyResultsExecutor extends CallbackNode<ApifyResultsConfig, Apify
   initializeState(inputs: any): ApifyResultsState & { isComplete?: boolean } {
     // Get resolved config from the executor (set by CallbackNodeActor)
     const config = (this as any).resolvedConfig as ApifyResultsConfig;
-    
+
     return {
       items: [],
       currentIndex: 0,
@@ -43,7 +38,7 @@ export class ApifyResultsExecutor extends CallbackNode<ApifyResultsConfig, Apify
     const logger = createLogger("ApifyResults");
     const { inputs, config } = event;
     const resolvedConfig = config as ApifyResultsConfig;
-    
+
     // Debug logging to understand input structure
     logger.info(`ApifyResults: Received event`, {
       eventType: event.type,
@@ -52,7 +47,7 @@ export class ApifyResultsExecutor extends CallbackNode<ApifyResultsConfig, Apify
       hasRunId: !!resolvedConfig?.runId,
       runIdValue: resolvedConfig?.runId,
       stateItemsLength: state.items.length,
-      isComplete: state.isComplete
+      isComplete: state.isComplete,
     });
 
     // If already complete, don't process any more events
@@ -64,16 +59,16 @@ export class ApifyResultsExecutor extends CallbackNode<ApifyResultsConfig, Apify
     // Check if this is a "continue" signal to advance iteration
     if (inputs?.continue !== undefined && state.items.length > 0) {
       logger.info(`ApifyResults: Received 'continue' signal`);
-      
+
       // Check if we've exhausted all items
       if (state.currentIndex >= state.items.length) {
         logger.info(`ApifyResults: All items processed, marking complete`);
         return {
           ...state,
-          isComplete: true
+          isComplete: true,
         };
       }
-      
+
       // Process next item
       const currentItem = state.items[state.currentIndex];
       const hasMore = state.currentIndex < state.items.length - 1;
@@ -117,7 +112,7 @@ export class ApifyResultsExecutor extends CallbackNode<ApifyResultsConfig, Apify
       try {
         // Build credential context for service
         const credentialContext = this.buildCredentialContext(event as any);
-        const results = await fetchApifyRunResults(resolvedConfig.runId, credentialContext.credentials);
+        const results = await fetchApifyRunResults(resolvedConfig.runId, credentialContext);
 
         if (!results || !Array.isArray(results)) {
           logger.error(`ApifyResults: Invalid results from Apify`, {
@@ -132,7 +127,7 @@ export class ApifyResultsExecutor extends CallbackNode<ApifyResultsConfig, Apify
         if (results.length > 0) {
           const firstItem = results[0];
           const sanitizedItem = this.sanitizeItem(firstItem);
-          
+
           emit({
             __outputs: {
               item: sanitizedItem,
@@ -141,7 +136,7 @@ export class ApifyResultsExecutor extends CallbackNode<ApifyResultsConfig, Apify
               hasMore: results.length > 1,
             },
           });
-          
+
           logger.info(`ApifyResults: Emitted first item (1/${results.length})`);
         }
 

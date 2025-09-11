@@ -39,3 +39,18 @@ export interface SearchWebExecutorOutput {
     imageResults: SearchWebOutput['imageResults'];
   };
 }
+
+export interface SearchResult {
+  title: string;
+  url: string;
+  source: string;
+  snippet?: string;
+}
+
+export interface ImageResult {
+  url: string;
+  title: string;
+  thumbnail?: string;
+  source_url?: string;
+  source_name?: string;
+}

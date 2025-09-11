@@ -78,7 +78,7 @@ export class ApifyStarterExecutor extends PromiseNode<ApifyStarterConfig> {
         const runId = await startApifyWebScraper(
           config.urls,
           { actorId: config.actorId },
-          credentialContext.credentials
+          credentialContext
         );
 
         logger.info("Successfully started Apify actor", {

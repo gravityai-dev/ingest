@@ -56,7 +56,7 @@ export class GoogleSheetExecutor extends CallbackNode<GoogleSheetConfig, GoogleS
       try {
         // Fetch the sheet data
         logger.info(`GoogleSheet: Fetching data from Google Sheets`, { spreadsheetId });
-        const sheetsData = await readGoogleSheet(spreadsheetId, range, credentialContext.credentials);
+        const sheetsData = await readGoogleSheet(spreadsheetId, range, credentialContext);
         const values = sheetsData.values || [];
 
         if (values.length === 0) {

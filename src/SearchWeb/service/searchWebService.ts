@@ -1,14 +1,5 @@
-import { createLogger } from "../../shared/platform";
-
-export interface SearchWebConfig {
-  query: string;
-  numResults: number;
-  numImages: number;
-  searchImages: boolean;
-  safeSearch: string;
-  country: string;
-  language: string;
-}
+import { createLogger, getNodeCredentials } from "../../shared/platform";
+import { SearchWebConfig } from "../util/types";
 
 export interface WebResult {
   title: string;
@@ -136,12 +127,13 @@ const SearchWebSerp = (apiKey: string) => {
  */
 export async function searchWeb(
   config: SearchWebConfig,
-  credentials: any
+  context: any
 ): Promise<SearchWebOutput> {
   const logger = createLogger("SearchWeb");
   logger.info("Starting web search", { query: config.query });
 
-  const apiKey = credentials.searchapi?.apiKey;
+  const credentials = await getNodeCredentials(context, "searchapiCredential");
+  const apiKey = credentials?.apiKey;
 
   if (!apiKey) {
     throw new Error("SearchAPI API key not found in credentials");

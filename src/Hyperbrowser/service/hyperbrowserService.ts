@@ -1,13 +1,13 @@
-import { createLogger } from "../../shared/platform";
-import { ExtractedLink, ExtractedTable } from "../util/types";
+import { createLogger, getNodeCredentials } from "../../shared/platform";
+import { HyperbrowserConfig, HyperbrowserOutput, HyperbrowserLink, ExtractedLink } from "../util/types";
 
 // Simplified types for the service layer
 interface SessionOptions {
+  acceptCookies?: boolean;
   useStealth?: boolean;
   useProxy?: boolean;
   solveCaptchas?: boolean;
   adblock?: boolean;
-  acceptCookies?: boolean;
 }
 
 export interface CrawlOptions {
@@ -22,23 +22,26 @@ export interface CrawlOptions {
 }
 
 export interface CrawlResult {
-  links: ExtractedLink[];
-  content: any;
-  metadata: {
+  links?: HyperbrowserLink[];
+  content?: string[];
+  metadata?: {
     url: string;
-    totalLinks: number;
-    totalTables: number;
-    pagesScraped: number;
+    title?: string;
+    description?: string;
     extractionMode: string;
+    pagesScraped: number;
     timestamp: string;
+    totalLinks?: number;
+    totalTables?: number;
   };
 }
 
 /**
- * Get Hyperbrowser configuration from credentials
+ * Get Hyperbrowser configuration from context
  */
-async function getHyperbrowserConfig(credentials: any) {
-  const apiKey = credentials.hyperbrowser?.apiKey;
+async function getHyperbrowserConfig(context: any) {
+  const credentials = await getNodeCredentials(context, "hyperbrowserCredential");
+  const apiKey = credentials?.apiKey;
   
   if (!apiKey) {
     throw new Error("Hyperbrowser API key not found in credentials");
@@ -55,10 +58,10 @@ async function getHyperbrowserConfig(credentials: any) {
  */
 export async function crawlWebPage(
   options: CrawlOptions,
-  credentials: any
+  context: any
 ): Promise<CrawlResult> {
   const logger = createLogger("HyperbrowserService");
-  const { apiKey, baseUrl } = await getHyperbrowserConfig(credentials);
+  const { apiKey, baseUrl } = await getHyperbrowserConfig(context);
   
   const {
     url,

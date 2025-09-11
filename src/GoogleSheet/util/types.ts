@@ -36,3 +36,9 @@ export interface GoogleSheetExecutorOutput {
     error?: string;
   };
 }
+
+export interface GoogleSheetsResponse {
+  range: string;
+  majorDimension: string;
+  values: any[][];
+}

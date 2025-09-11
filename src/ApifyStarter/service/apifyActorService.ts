@@ -1,10 +1,11 @@
-import { createLogger } from "../../shared/platform";
+import { createLogger, getNodeCredentials } from "../../shared/platform";
 
 /**
- * Get Apify configuration from credentials
+ * Get Apify configuration from context
  */
-async function getApifyConfig(credentials: any) {
-  const apiToken = credentials.apify?.token;
+async function getApifyConfig(context: any) {
+  const credentials = await getNodeCredentials(context, "apifyCredential");
+  const apiToken = credentials?.token;
   
   if (!apiToken) {
     throw new Error("Apify API token not found in credentials");
@@ -43,10 +44,10 @@ function parseUrls(urls: any): string[] {
 export async function startApifyActor(
   actorId: string,
   input: any,
-  credentials: any
+  context: any
 ): Promise<string> {
   const logger = createLogger("ApifyActorService");
-  const { apiToken, baseUrl } = await getApifyConfig(credentials);
+  const { apiToken, baseUrl } = await getApifyConfig(context);
 
   // Check if this is a task (contains ~) or an actor
   const isTask = actorId.includes('~');

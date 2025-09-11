@@ -1,23 +1,27 @@
-import { createLogger } from "../../shared/platform";
+import { createLogger, getNodeCredentials } from "../../shared/platform";
+import { GoogleSheetsResponse } from "../util/types";
 
 interface GoogleSheetsCredentials {
   apiKey: string;
 }
 
-interface GoogleSheetsResponse {
-  values?: any[][];
-  range?: string;
+export interface GoogleSheetsOptions {
+  spreadsheetId: string;
+  range: string;
+  apiKey?: string;
+  valueRenderOption?: string;
   majorDimension?: string;
 }
 
 export async function readGoogleSheet(
   spreadsheetId: string,
   range: string,
-  credentials: any
+  context: any
 ): Promise<GoogleSheetsResponse> {
   const logger = createLogger("GoogleSheetsService");
   
-  const apiKey = credentials.googleApi?.apiKey;
+  const credentials = await getNodeCredentials(context, "googleApiCredential");
+  const apiKey = credentials?.apiKey;
 
   if (!apiKey) {
     throw new Error("Google Sheets API key not found in credentials");
