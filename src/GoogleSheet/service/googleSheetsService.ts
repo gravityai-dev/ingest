@@ -17,7 +17,7 @@ export async function readGoogleSheet(
 ): Promise<GoogleSheetsResponse> {
   const logger = createLogger("GoogleSheetsService");
   
-  const apiKey = credentials.googleApiCredential?.apiKey;
+  const apiKey = credentials.googleApi?.apiKey;
 
   if (!apiKey) {
     throw new Error("Google Sheets API key not found in credentials");

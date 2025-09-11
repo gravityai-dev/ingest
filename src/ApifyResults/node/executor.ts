@@ -236,7 +236,7 @@ export class ApifyResultsExecutor extends CallbackNode<ApifyResultsConfig, Apify
   private buildCredentialContext(context: NodeExecutionContext) {
     return {
       credentials: {
-        apifyCredential: context.credentials?.apifyCredential || {},
+        apify: context.credentials?.apifyCredential || {},
       },
       nodeType: NODE_TYPE,
       workflowId: context.workflow?.id || "",

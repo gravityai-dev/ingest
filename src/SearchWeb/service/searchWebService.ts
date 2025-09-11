@@ -141,7 +141,7 @@ export async function searchWeb(
   const logger = createLogger("SearchWeb");
   logger.info("Starting web search", { query: config.query });
 
-  const apiKey = credentials.searchapiCredential?.apiKey;
+  const apiKey = credentials.searchapi?.apiKey;
 
   if (!apiKey) {
     throw new Error("SearchAPI API key not found in credentials");

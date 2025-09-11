@@ -177,7 +177,7 @@ export class GoogleSheetExecutor extends CallbackNode<GoogleSheetConfig, GoogleS
   private buildCredentialContext(context: NodeExecutionContext) {
     return {
       credentials: {
-        googleApiCredential: context.credentials?.googleApiCredential || {},
+        googleApi: context.credentials?.googleApiCredential || {},
       },
       nodeType: NODE_TYPE,
       workflowId: context.workflow?.id || "",

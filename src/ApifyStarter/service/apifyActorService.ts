@@ -4,7 +4,7 @@ import { createLogger } from "../../shared/platform";
  * Get Apify configuration from credentials
  */
 async function getApifyConfig(credentials: any) {
-  const apiToken = credentials.apifyCredential?.token;
+  const apiToken = credentials.apify?.token;
   
   if (!apiToken) {
     throw new Error("Apify API token not found in credentials");

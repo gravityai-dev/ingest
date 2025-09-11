@@ -57,7 +57,7 @@ export class SearchWebExecutor extends PromiseNode<SearchWebConfig> {
   private buildCredentialContext(context: NodeExecutionContext) {
     return {
       credentials: {
-        searchapiCredential: context.credentials?.searchapiCredential || {},
+        searchapi: context.credentials?.searchapiCredential || {},
       },
       nodeType: NODE_TYPE,
       workflowId: context.workflow?.id || "",

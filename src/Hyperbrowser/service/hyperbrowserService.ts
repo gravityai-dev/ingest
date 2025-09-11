@@ -38,7 +38,7 @@ export interface CrawlResult {
  * Get Hyperbrowser configuration from credentials
  */
 async function getHyperbrowserConfig(credentials: any) {
-  const apiKey = credentials.hyperbrowserCredential?.apiKey;
+  const apiKey = credentials.hyperbrowser?.apiKey;
   
   if (!apiKey) {
     throw new Error("Hyperbrowser API key not found in credentials");
