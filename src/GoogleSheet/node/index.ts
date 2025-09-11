@@ -4,8 +4,8 @@ import { GoogleSheetExecutor } from "./executor";
 export const NODE_TYPE = "GoogleSheet";
 
 function createNodeDefinition(): EnhancedNodeDefinition {
-  const { NodeInputType, NodeConcurrency, NodeExecutionMode } = getPlatformDependencies();
-  
+  const { NodeInputType } = getPlatformDependencies();
+
   return {
     type: NODE_TYPE,
     category: "Ingest",
@@ -82,12 +82,6 @@ function createNodeDefinition(): EnhancedNodeDefinition {
         required: true,
       },
     ],
-
-    capabilities: {
-      isTrigger: false,
-      concurrency: NodeConcurrency.SEQUENTIAL,
-      executionMode: NodeExecutionMode.CALLBACK,
-    },
   };
 }
 
