@@ -7,7 +7,7 @@ function createNodeDefinition(): EnhancedNodeDefinition {
   const { NodeInputType, NodeExecutionMode } = getPlatformDependencies();
   
   return {
-    packageVersion: "1.0.13",
+    packageVersion: "1.0.14",
     type: NODE_TYPE,
     name: "Apify Results",
     description: "Fetch and iterate through results from an Apify run",
