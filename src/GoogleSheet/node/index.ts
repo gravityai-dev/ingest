@@ -7,7 +7,7 @@ function createNodeDefinition(): EnhancedNodeDefinition {
   const { NodeInputType } = getPlatformDependencies();
 
   return {
-    packageVersion: "1.0.15",
+    packageVersion: "1.0.16",
     type: NODE_TYPE,
     category: "Ingest",
     name: "Google Sheet",
