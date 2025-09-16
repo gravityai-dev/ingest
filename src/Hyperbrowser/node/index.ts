@@ -7,7 +7,7 @@ function createNodeDefinition(): EnhancedNodeDefinition {
   const { NodeInputType } = getPlatformDependencies();
   
   return {
-    packageVersion: "1.0.18",
+    packageVersion: "1.0.19",
     type: NODE_TYPE,
     name: "Hyperbrowser",
     description: "Web scraper that extracts links and content from websites using Hyperbrowser SDK",
