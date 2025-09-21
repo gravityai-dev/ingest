@@ -7,7 +7,7 @@ function createNodeDefinition(): EnhancedNodeDefinition {
   const { NodeInputType, NodeConcurrency } = getPlatformDependencies();
 
   return {
-    packageVersion: "1.0.19",
+    packageVersion: "1.0.22",
     type: NODE_TYPE,
     name: "Document",
     description:
