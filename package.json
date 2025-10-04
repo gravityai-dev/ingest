@@ -1,6 +1,6 @@
 {
   "name": "@gravityai-dev/ingest",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "description": "Data ingestion nodes for Gravity workflow system",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@gravityai-dev/gravity-server": "^0.2.121",
-    "@gravityai-dev/plugin-base": "^1.0.28",
+    "@gravityai-dev/plugin-base": "^1.0.30",
     "pdf-parse": "^1.1.1",
     "mammoth": "^1.6.0",
     "jschardet": "^3.1.3",
