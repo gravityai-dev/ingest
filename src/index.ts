@@ -5,7 +5,7 @@ const plugin = createPlugin({
   name: "@gravityai-dev/ingest",
   version: "1.0.0",
   description: "Data ingestion nodes for Gravity workflow system",
-  
+
   async setup(api) {
     // Initialize platform dependencies
     const { initializePlatformFromAPI } = await import("@gravityai-dev/plugin-base");
@@ -39,17 +39,18 @@ const plugin = createPlugin({
     const { GoogleSheetNode } = await import("./GoogleSheet/node");
     api.registerNode(GoogleSheetNode);
 
+    // Import and register PlaidTransactions node
+    const { PlaidTransactionsNode } = await import("./PlaidTransactions/node");
+    api.registerNode(PlaidTransactionsNode);
+
     // Import and register credentials
-    const { 
-      SearchAPICredential, 
-      ApifyCredential, 
-      HyperbrowserCredential,
-      GoogleAPICredential 
-    } = await import("./credentials");
+    const { SearchAPICredential, ApifyCredential, HyperbrowserCredential, GoogleAPICredential, PlaidCredential } =
+      await import("./credentials");
     api.registerCredential(SearchAPICredential);
     api.registerCredential(ApifyCredential);
     api.registerCredential(HyperbrowserCredential);
     api.registerCredential(GoogleAPICredential);
+    api.registerCredential(PlaidCredential);
   },
 });
 

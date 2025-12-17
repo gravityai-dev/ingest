@@ -16,8 +16,8 @@ export const SearchAPICredential = {
       required: true,
       secret: true,
       description: "Your SearchAPI.io API key",
-      placeholder: "Enter your SearchAPI.io API key"
-    }
+      placeholder: "Enter your SearchAPI.io API key",
+    },
   ],
 };
 
@@ -34,8 +34,8 @@ export const ApifyCredential = {
       required: true,
       secret: true,
       description: "Your Apify API token",
-      placeholder: "Enter your Apify API token"
-    }
+      placeholder: "Enter your Apify API token",
+    },
   ],
 };
 
@@ -52,8 +52,8 @@ export const HyperbrowserCredential = {
       required: true,
       secret: true,
       description: "Your Hyperbrowser API key",
-      placeholder: "Enter your Hyperbrowser API key"
-    }
+      placeholder: "Enter your Hyperbrowser API key",
+    },
   ],
 };
 
@@ -70,7 +70,44 @@ export const GoogleAPICredential = {
       required: true,
       secret: true,
       description: "Your Google API key with Sheets API enabled",
-      placeholder: "Enter your Google API key"
-    }
+      placeholder: "Enter your Google API key",
+    },
+  ],
+};
+
+// Plaid Credential for banking data
+export const PlaidCredential = {
+  name: "plaidCredential",
+  displayName: "Plaid",
+  description: "Plaid API credentials for accessing banking data (Sandbox/Development/Production)",
+  properties: [
+    {
+      name: "clientId",
+      displayName: "Client ID",
+      type: "string" as const,
+      required: true,
+      secret: false,
+      description: "Your Plaid client ID from the Plaid Dashboard",
+      placeholder: "Enter your Plaid client ID",
+    },
+    {
+      name: "secret",
+      displayName: "Secret",
+      type: "string" as const,
+      required: true,
+      secret: true,
+      description: "Your Plaid secret key (use Sandbox secret for testing)",
+      placeholder: "Enter your Plaid secret",
+    },
+    {
+      name: "environment",
+      displayName: "Environment",
+      type: "string" as const,
+      required: false,
+      secret: false,
+      description: "Plaid environment: sandbox, development, or production",
+      placeholder: "sandbox",
+      default: "sandbox",
+    },
   ],
 };

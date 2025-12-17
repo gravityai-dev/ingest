@@ -7,7 +7,7 @@ function createNodeDefinition(): EnhancedNodeDefinition {
   const { NodeInputType, NodeConcurrency } = getPlatformDependencies();
 
   return {
-    packageVersion: "1.0.25",
+    packageVersion: "1.1.1",
     type: NODE_TYPE,
     name: "Document Parser",
     description: "Parse documents (PDF, DOCX, TXT) and extract text content",

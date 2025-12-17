@@ -7,7 +7,7 @@ function createNodeDefinition(): EnhancedNodeDefinition {
   const { NodeInputType } = getPlatformDependencies();
   
   return {
-    packageVersion: "1.0.25",
+    packageVersion: "1.1.1",
     type: NODE_TYPE,
     name: "Search Web",
     description: "Search the web using SearchAPI.io for web results and images",
